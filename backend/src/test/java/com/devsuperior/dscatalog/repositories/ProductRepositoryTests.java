@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 import com.devsuperior.dscatalog.entities.Product;
 import com.devsuperior.dscatalog.tests.Factory;
@@ -52,14 +53,13 @@ public class ProductRepositoryTests {
 		Assertions.assertFalse(result.isPresent());
 	}
 	
-	/* Error 
-	 * @Test 
+   @Test 
 	public void deleteShouldThrowEmptyResultDataAccessExceptionWhenIdDoesNotExists() {
 		
 		Assertions.assertThrows(EmptyResultDataAccessException.class, () -> {
 			repository.deleteById(nonexintingId);
 		});
-	}*/
+	}
 	
 	@Test
 	public void findByIdShouldTurnBackOptionalNotEmptyWhenIdExists() {
