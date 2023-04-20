@@ -28,7 +28,7 @@ import com.devsuperior.dscatalog.services.exceptions.DatabaseException;
 import com.devsuperior.dscatalog.services.exceptions.ResourceNotFoundException;
 import com.devsuperior.dscatalog.tests.Factory;
 
-import jakarta.persistence.EntityNotFoundException;
+import javax.persistence.EntityNotFoundException;
 
 @ExtendWith(SpringExtension.class)
 public class ProductServiceTests {
@@ -68,11 +68,11 @@ public class ProductServiceTests {
 		Mockito.when(repository.findById(existingId)).thenReturn(Optional.of(product));
 		Mockito.when(repository.findById(nonExistingId)).thenReturn(Optional.empty());
 		
-		Mockito.when(repository.getReferenceById(existingId)).thenReturn(product);
-		Mockito.when(repository.getReferenceById(nonExistingId)).thenThrow(EntityNotFoundException.class);
+		Mockito.when(repository.getOne(existingId)).thenReturn(product);
+		Mockito.when(repository.getOne(nonExistingId)).thenThrow(EntityNotFoundException.class);
 		
-		Mockito.when(categoryRepository.getReferenceById(existingId)).thenReturn(category);
-		Mockito.when(categoryRepository.getReferenceById(nonExistingId)).thenThrow(EntityNotFoundException.class);
+		Mockito.when(categoryRepository.getOne(existingId)).thenReturn(category);
+		Mockito.when(categoryRepository.getOne(nonExistingId)).thenThrow(EntityNotFoundException.class);
 		
 		Mockito.doNothing().when(repository).deleteById(existingId);
 		Mockito.doThrow(EmptyResultDataAccessException.class).when(repository).deleteById(nonExistingId);
